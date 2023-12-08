@@ -1,2 +1,2 @@
-# Client-server-for-theatre
-БД театра с клиент-сервером для дэмо-экзамена
+# Client-server-for-hospital
+БД больницы с клиент-сервером для ПП
