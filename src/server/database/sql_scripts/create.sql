@@ -21,7 +21,7 @@ CREATE TABLE Staff(
 
 CREATE TABLE Role(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  title VARCHAR(55)
+  title VARCHAR(55) NOT NULL
 );
 
 CREATE TABLE Users(
@@ -43,7 +43,7 @@ CREATE TABLE Users(
  
  CREATE TABLE Status_request(
    id INTEGER PRIMARY KEY AUTOINCREMENT,
-   Title VARCHAR(55) NOT NULL
+   title VARCHAR(55) NOT NULL
  );
  
  CREATE TABLE Request(
@@ -65,7 +65,7 @@ CREATE TABLE Users(
  CREATE TABLE Disease(
    id INTEGER PRIMARY KEY AUTOINCREMENT,
    title VARCHAR(55) NOT NULL,
-   description VARCHAR NOT NULL,
+   description VARCHAR,
    id_type_of_disease INT NOT NULL,
    FOREIGN KEY (id_type_of_disease) REFERENCES Type_of_disease(id)
     on DELETE SET NULL ON UPDATE no ACTION
@@ -76,7 +76,7 @@ CREATE TABLE Users(
    id_req INT NOT NULL,
    id_staff INT NOT NULL,
    id_disease INT NOT NULL,
-   id_type_of_treatment INT not NULL,
+   id_type_of_treatment INT NOT NULL,
    description_of_treatment VARCHAR NOT NULL,
    FOREIGN KEY (id_req) REFERENCES Request(id)
   	on DELETE SET NULL ON UPDATE no ACTION,
