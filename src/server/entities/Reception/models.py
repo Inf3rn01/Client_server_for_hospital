@@ -1,7 +1,7 @@
 from pydantic import BaseModel
-
+from typing import Optional
 def Reception(BaseModel):
-    id: optional[int]
+    id: Optional[int]
     id_req: int
     id_staff: int
     id_disease: int
