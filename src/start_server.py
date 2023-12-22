@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from server import routers
-import uvicorn, settings
+import uvicorn, server.settings as settings
 from fastapi.responses import RedirectResponse
 
 app = FastAPI(title="Hospital")
