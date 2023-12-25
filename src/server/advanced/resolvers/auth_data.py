@@ -7,6 +7,4 @@ def login(login_str, password):
         AuthData.password == password
     )
 
-    return {'error': 'Incorrect login or password'} if auth_data is None else auth_data.user_id.id
-
-
+    return {'error': 'Incorrect login or password'} if auth_data is None else auth_data.id_user.id

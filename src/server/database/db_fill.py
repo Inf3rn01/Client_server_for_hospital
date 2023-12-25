@@ -2,88 +2,81 @@ from src.server.database.models import *
 
 
 def db_fill():
-    User.create(
-        fullname="Некое Имя Пользователя",
-        balance=1000,
-        regular=False
+    Post.create(
+        title="Хирург"
     )
 
-    User.create(
-        fullname="Имя Постоянного Пользователя",
-        balance=3000,
-        regular=True
+    Department.create(
+        title="Хирургическое"
+    )
+
+    Role.create(
+        title="User"
+    )
+
+    Users.create(
+        FIO="Абдуржмаев Энакентий Эдуардович",
+        id_role=Role.get(id)
     )
 
     AuthData.create(
-        login="1",
-        password="1",
-        user_id=User.get(User.id == 1)
+        login="user",
+        password="user",
+        user_id=Users.get(id)
     )
-
-    AuthData.create(
-        login="2",
-        password="2",
-        user_id=User.get(User.id == 2)
-    ).save()
 
     Staff.create(
-        user_id=User.get(User.id == 1)
+        id_post=Post.get(id),
+        id_user=Users.get(id),
+        id_department=Department.get(id)
     )
 
-    Product.create(
-        name="Антипаскалин",
-        price=100,
-        count=100
+    Type_of_treatment.create(
+        title="Трансплантация"
     )
 
-    Product.create(
-        name="Пиво жигулёвское",
-        price=36,
-        count=24
+    Status_request.create(
+        title="Принята"
     )
 
-    UserOrder.create(
-        count=1,
-        user_id=User.get(User.id == 2),
-        product_id=Product.get(Product.id == 2)
+    Status_request.create(
+        title="Отменена"
+    ).save()
+
+    Request.create(
+        add_data="11/12/23 19:23",
+        id_status_req=Status_request.get(id),
+        id_user=Users.get(id)
     )
 
-    Discount.create(
-        product_id=Product.get(Product.id == 1),
-        percent=20,
-        active=True
+    Type_of_disease.create(
+        title="Наследственный"
     )
 
-    Discount.create(
-        product_id=Product.get(Product.id == 2),
-        percent=20,
-        active=False
+    Disease.create(
+        title="Синдром Дауна",
+        description="Наследственное заболевание, обусловленное трисомией по 21-й хромосоме.",
+        id_type_of_disease=Type_of_disease.get(id)
     )
 
-    UserDiscount.create(
-        user_id=User.get(User.id == 1),
-        product_id=Product.get(Product.id == 1),
-        percent=5
+    Reception.create(
+        id_req=Request.get(id),
+        id_staff=Staff.get(id),
+        id_disease=Disease.get(id),
+        id_type_of_treatment=Type_of_treatment.get(id),
+        description_of_treatment="Трансплантация костного мозга, также назначаются иммуноглобулины, цитостатики, антибиотик"
     )
 
-    UserDiscount.create(
-        user_id=User.get(User.id == 2),
-        product_id=Product.get(Product.id == 2),
-        percent=5
+    Treatment_status.create(
+        title="Выписан"
     )
 
-    Storage.create(
-        address="Проспект суспензии из душ, д15"
-    )
+    Treatment_status.create(
+        title="На больничном"
+    ).save()
 
-    StorageOrder.create(
-        product_id=Product.get(Product.id == 1),
-        storage_id=Storage.get(Storage.id == 1),
-        count=10
-    )
-
-    ProductInStorage.create(
-        product_id=Product.get(Product.id == 1),
-        storage_id=Storage.get(Storage.id == 1),
-        count=1000
+    Patients.create(
+        id_reception=Reception.get(id),
+        id_status=Treatment_status.get(id),
+        data_of_discharge="26/12/23 10:00"
     )

@@ -1,72 +1,90 @@
 from peewee import *
 import settings
 
-db: SqliteDatabase = SqliteDatabase(f'{settings.DATABASE_PATH}{settings.DATABASE_NAME}')
+db = SqliteDatabase(f'{settings.DATABASE_PATH}')
 
 
 class BaseModel(Model):
     class Meta:
         database = db
 
+
 class Post(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Department(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
 
-class Staff(BaseModel):
-    FIO = CharField(max_length=55, default='')
-    id_post = IntegerField(default=None)
-    id_department = IntegerField(default=None)
 
 class Role(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Users(BaseModel):
-    FIO = CharField(max_length=55, default='')
-    login = CharField(max_length=55, default='')
-    password = CharField(max_length=55, default='')
+    FIO = CharField(default='')
     id_role = IntegerField(default=None)
 
+
+class AuthData(BaseModel):
+    login = CharField(default="")
+    password = CharField(default="")
+    id_user = ForeignKeyField(Users, related_name='auth_data_user_id', default=0)
+
+
+class Staff(BaseModel):
+    id_user = ForeignKeyField(Users, default=2)
+    id_post = ForeignKeyField(Post, default=None)
+    id_department = ForeignKeyField(Department, default=None)
+
+
 class Type_of_treatment(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Status_request(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Request(BaseModel):
-    add_data = TextField(default='')
-    id_status_req = IntegerField(default=None)
-    id_user = IntegerField(default=None)
+    add_data = DateField(default='')
+    id_status_req = ForeignKeyField(Status_request, default=2)
+    id_user = ForeignKeyField(Users, default=1)
+
 
 class Type_of_disease(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Disease(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
     description = CharField(default='')
-    id_type_of_disease = IntegerField(default=None)
+    id_type_of_disease = ForeignKeyField(Type_of_disease, default=0)
+
 
 class Reception(BaseModel):
-    id_req = IntegerField(default=None)
-    id_staff = IntegerField(default=None)
-    id_disease = IntegerField(default=None)
-    id_type_of_treatment = IntegerField(default=None)
+    id_req = ForeignKeyField(Request, default=None)
+    id_staff = ForeignKeyField(Staff, default=None)
+    id_disease = ForeignKeyField(Disease, default=None)
+    id_type_of_treatment = ForeignKeyField(Type_of_treatment, default=None)
     description_of_treatment = CharField(default='')
 
+
 class Treatment_status(BaseModel):
-    title = CharField(max_length=55, default='')
+    title = CharField(default='')
+
 
 class Patients(BaseModel):
-    id_reception = IntegerField(default=None)
-    id_status = IntegerField(default=None)
-    data_of_discharge = TextField(default='')
+    id_reception = ForeignKeyField(Reception, default=None)
+    id_status = ForeignKeyField(Treatment_status, default=None)
+    data_of_discharge = DateField()
 
 
 db.create_tables([
     Post, 
     Department,
     Staff,
+    AuthData,
     Role,
     Users,
     Type_of_disease,

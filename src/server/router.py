@@ -5,8 +5,8 @@ from src.server.service import *
 
 routers = (
     RouterManager(
-        database_model=database_models.User,
-        pydantic_model=pydantic_models.User,
+        database_model=database_models.Users,
+        pydantic_model=pydantic_models.Users,
         prefix='/user',
         tags=['User']
     ).fastapi_router,
@@ -26,51 +26,79 @@ routers = (
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.Product,
-        pydantic_model=pydantic_models.Product,
-        prefix='/product',
-        tags=['Product']
+        database_model=database_models.Post,
+        pydantic_model=pydantic_models.Post,
+        prefix='/post',
+        tags=['Post']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.UserOrder,
-        pydantic_model=pydantic_models.UserOrder,
-        prefix='/user_order',
-        tags=['UserOrder']
+        database_model=database_models.Department,
+        pydantic_model=pydantic_models.Department,
+        prefix='/department',
+        tags=['Department']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.Discount,
-        pydantic_model=pydantic_models.Discount,
-        prefix='/discount',
-        tags=['Discount']
+        database_model=database_models.Role,
+        pydantic_model=pydantic_models.Role,
+        prefix='/role',
+        tags=['Role']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.Storage,
-        pydantic_model=pydantic_models.Storage,
-        prefix='/storage',
-        tags=['Storage']
+        database_model=database_models.Type_of_disease,
+        pydantic_model=pydantic_models.Type_of_disease,
+        prefix='/type_of_disease',
+        tags=['Type_of_disease']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.UserDiscount,
-        pydantic_model=pydantic_models.UserDiscount,
-        prefix='/user_discount',
-        tags=['UserDiscount']
+        database_model=database_models.Type_of_treatment,
+        pydantic_model=pydantic_models.Type_of_treatment,
+        prefix='/type_of_treatment',
+        tags=['Type_of_treatment']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.StorageOrder,
-        pydantic_model=pydantic_models.StorageOrder,
-        prefix='/storage_order',
-        tags=['StorageOrder']
+        database_model=database_models.Request,
+        pydantic_model=pydantic_models.Request,
+        prefix='/request',
+        tags=['Request']
     ).fastapi_router,
 
     RouterManager(
-        database_model=database_models.ProductInStorage,
-        pydantic_model=pydantic_models.ProductInStorage,
-        prefix='/product_in_storage',
-        tags=['ProductInStorage']
+        database_model=database_models.Status_request,
+        pydantic_model=pydantic_models.Status_request,
+        prefix='/status_request',
+        tags=['Status_request']
     ).fastapi_router,
+
+    RouterManager(
+        database_model=database_models.Disease,
+        pydantic_model=pydantic_models.Disease,
+        prefix='/disease',
+        tags=['Disease']
+    ).fastapi_router,
+
+    RouterManager(
+        database_model=database_models.Reception,
+        pydantic_model=pydantic_models.Reception,
+        prefix='/reception',
+        tags=['Reception']
+    ).fastapi_router,
+
+    RouterManager(
+        database_model=database_models.Treatment_status,
+        pydantic_model=pydantic_models.Treatment_status,
+        prefix='/treatment_status',
+        tags=['Treatment_status']
+    ).fastapi_router,
+
+    RouterManager(
+        database_model=database_models.Patients,
+        pydantic_model=pydantic_models.Patients,
+        prefix='/patients',
+        tags=['Patients']
+    ).fastapi_router
 )
